@@ -289,8 +289,6 @@
 				C62A5B8A246C67D400CCC912 /* ViewModel */,
 				C62A5B89246C67CF00CCC912 /* View */,
 				C62A5B83246C5C9700CCC912 /* CustomViews */,
-				C62A5B7D246C3FEA00CCC912 /* CoinListViewController.swift */,
-				C62A5B7F246C400300CCC912 /* CoinListView.swift */,
 			);
 			path = CoinList;
 			sourceTree = "<group>";
@@ -423,6 +421,8 @@
 		C62A5B89246C67CF00CCC912 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C62A5B7D246C3FEA00CCC912 /* CoinListViewController.swift */,
+				C62A5B7F246C400300CCC912 /* CoinListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1048,6 +1048,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4XWMMXB4KD;
 				INFOPLIST_FILE = BtgChallenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1069,6 +1070,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4XWMMXB4KD;
 				INFOPLIST_FILE = BtgChallenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
