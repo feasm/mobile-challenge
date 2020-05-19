@@ -106,8 +106,6 @@ platform :ios do
   end
 
   lane :uploadToAppCenter do
-    buildProject
-  
     appcenter_upload(
       api_token: "8cb9bdf3a7179a3b52673eb0c3cdd98c03b32d50",
       owner_name: "feasm159-gmail.com",
@@ -116,5 +114,10 @@ platform :ios do
       #file: "build/" + ipaName,
       notify_testers: true
     )
+  end
+  
+  lane :deploy do
+    buildProject
+    uploadToAppCenter
   end
 end
