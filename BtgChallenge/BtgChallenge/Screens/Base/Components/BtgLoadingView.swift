@@ -21,7 +21,12 @@ class BtgLoadingView: UIView {
     private var presenterView: UIView?
     
     lazy var activity: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(style: .large)
+        let activity = UIActivityIndicatorView()
+        
+        if #available(iOS 13, *) {
+            activity.style = .large
+        }
+        
         activity.tintColor = UIColor.darkBlue
         activity.color = UIColor.darkBlue
         return activity

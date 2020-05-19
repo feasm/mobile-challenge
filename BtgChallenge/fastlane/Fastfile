@@ -16,6 +16,8 @@
 default_platform(:ios)
 
 platform :ios do
+  ipaName = "BtgChallenge.ipa"
+
   desc "Run unit tests"
   lane :test do
     run_tests(
@@ -53,27 +55,69 @@ platform :ios do
   end
 
   desc "Test swiftlint rules"
-  lane :lint do 
+  lane :lint do
     sh(
-	"rm", 
-	"-rf", 
-	"./Reports"
+        "rm",
+        "-rf",
+        "./Reports"
     )
 
     sh(
-	"mkdir", 
-	"./Reports"
+        "mkdir",
+        "./Reports"
     )
 
     swiftlint(
-    mode: :lint,                            # SwiftLint mode: :lint (default) or :autocorrect
-    executable: "Pods/SwiftLint/swiftlint", # The SwiftLint binary path (optional). Important if you've installed it via CocoaPods
-    output_file: "./Reports/swiftlint.result.json",   # The path of the output file (optional)
-    reporter: "json",                       # The custom reporter to use (optional)
-    config_file: ".swiftlint.yml",       # The path of the configuration file (optional)
-    ignore_exit_status: true,               # Allow fastlane to continue even if SwiftLint returns a non-zero exit status (Default: false)
-    quiet: false,                            # Don't print status logs like 'Linting ' & 'Done linting' (Default: false)
-    strict: false                            # Fail on warnings? (Default: false)
-)
+        mode: :lint,                            # SwiftLint mode: :lint (default) or :autocorrect
+        executable: "Pods/SwiftLint/swiftlint", # The SwiftLint binary path (optional). Important if you've installed it via CocoaPods
+        output_file: "./Reports/swiftlint.result.json",   # The path of the output file (optional)
+        reporter: "json",                       # The custom reporter to use (optional)
+        config_file: ".swiftlint.yml",       # The path of the configuration file (optional)
+        ignore_exit_status: true,               # Allow fastlane to continue even if SwiftLint returns a non-zero exit status (Default: false)
+        quiet: false,                            # Don't print status logs like 'Linting ' & 'Done linting' (Default: false)
+        strict: false                            # Fail on warnings? (Default: false)
+    )
+  end
+
+  lane :buildProject do
+    cert(
+          team_id: "8E3BBC4A3W",
+          username: "feasm159@gmail.com"
+    )
+  
+    sigh(
+        username: "feasm159@gmail.com",
+        team_id: "8E3BBC4A3W",
+        app_identifier: "com.feasm.BtgChallenge",
+        provisioning_name: "BTGProfile"
+    )
+  
+      gym(
+        scheme: "BtgChallenge",
+        clean: true,
+        workspace: "BtgChallenge.xcworkspace",
+        include_bitcode: false,
+        include_symbols: true,
+        export_method: "development",
+        output_directory: "build/",
+        output_name: ipaName,
+        buildlog_path: "logs/",
+      )
+  end
+
+  lane :uploadToAppCenter do
+    appcenter_upload(
+      api_token: "8cb9bdf3a7179a3b52673eb0c3cdd98c03b32d50",
+      owner_name: "feasm159-gmail.com",
+      owner_type: "user",
+      app_name: "BTGChallenge",
+      #file: "build/" + ipaName,
+      notify_testers: true
+    )
+  end
+  
+  lane :deploy do
+    buildProject
+    uploadToAppCenter
   end
 end

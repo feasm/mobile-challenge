@@ -36,6 +36,16 @@ Run tests and code coverage
 fastlane ios lint
 ```
 Test swiftlint rules
+### ios buildProject
+```
+fastlane ios buildProject
+```
+
+### ios uploadToAppCenter
+```
+fastlane ios uploadToAppCenter
+```
+
 
 ----
 
